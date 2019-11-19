@@ -1,1 +1,1 @@
-json.extract! todo_item, :id, :title, :created_at, :updated_at, :user_id
+json.extract! todo_item, :id, :title, :user_id, :complete, :created_at, :updated_at
