@@ -7,8 +7,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%# TODO: Conditionally load this on the correct view, and load a real app, not `hello_react`  %>
-    <%= javascript_pack_tag 'hello_react' %>
+    <%# TODO: Conditionally a real app, not `hello_react`  %>
+    <%= javascript_pack_tag 'components/TodoApp' if params[:action] == 'my_todo_items' %>
   </head>
 
   <body>
@@ -24,7 +24,7 @@
       <li>
         <%= link_to('Login', new_user_session_path) %>  
       </li>
-    <% end %>    
+    <% end %>
     <%= yield %>
   </body>
 </html>
