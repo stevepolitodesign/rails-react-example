@@ -27,4 +27,15 @@ RSpec.describe User, type: :model do
     end        
   end
 
+  describe "todo_item associations" do
+    let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
+    it "has many todo items" do
+      relation = described_class.reflect_on_association(:todo_items)
+      expect(relation.macro).to eq(:has_many)
+    end
+    it "destroys associated todo_items" do
+      expect{ user_with_todo_items.destroy }.to change { TodoItem.count }.by(-5)
+    end
+  end
+
 end
