@@ -1,22 +1,30 @@
 class Api::V1::TodoItemsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_todo_item, only: [:show, :edit, :update, :destroy]
 
     def index
-      @todo_items = TodoItem.all
+      @todo_items = current_user.todo_items.all
     end
   
     def show
+      respond_to do |format|
+        if authorized?
+          format.json { render :show }
+        else
+          format.json { render :unauthorized, status: 401 }
+        end
+      end
     end
   
     def new
-      @todo_item = TodoItem.new
+      @todo_item = current_user.todo_item.build
     end
   
     def edit
     end
   
     def create
-      @todo_item = TodoItem.new(todo_item_params)
+      @todo_item = current_user.todo_item.build(todo_item_params)
   
       respond_to do |format|
         if @todo_item.save
@@ -48,6 +56,10 @@ class Api::V1::TodoItemsController < ApplicationController
       
       def set_todo_item
         @todo_item = TodoItem.find(params[:id])
+      end
+
+      def authorized?
+        @todo_item.user == current_user
       end
   
       def todo_item_params
