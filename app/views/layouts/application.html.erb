@@ -15,6 +15,16 @@
     <%#  TODO: Make a shared partial for flash messages %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <%# TODO: Make this a partial %>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+      </li>
+    <% else %>
+      <li>
+        <%= link_to('Login', new_user_session_path) %>  
+      </li>
+    <% end %>    
     <%= yield %>
   </body>
 </html>
