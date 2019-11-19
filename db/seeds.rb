@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 2.times do |i|
-    User.create(email: "user-#{i}.example.com", password: "password")
+    User.create(email: "user-#{i}@example.com", password: "password", password_confirmation: "password")
 end
 
 User.all.each_with_index do |u, i|
