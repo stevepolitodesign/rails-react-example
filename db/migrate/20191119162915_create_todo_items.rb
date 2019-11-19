@@ -3,7 +3,7 @@ class CreateTodoItems < ActiveRecord::Migration[6.0]
     create_table :todo_items do |t|
       t.string :title
       t.references :user, null: false, foreign_key: true
-      t.boolean :complete
+      t.boolean :complete, default: false
 
       t.timestamps
     end
