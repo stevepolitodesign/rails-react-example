@@ -8,8 +8,7 @@ class TodoForm extends React.Component {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this);
         this.titleRef = React.createRef();
-        this.currentUserRef = React.createRef();
-        this.completeRef = React.createRef();
+        this.formRef = React.createRef();
     }
 
     handleSubmit(e) {
@@ -24,13 +23,13 @@ class TodoForm extends React.Component {
         })
         .then( (response) => {
           const todoItem = response.data
-          this.props.addTodoItem(todoItem);
-          e.currentTarget.reset();
+          this.props.addTodoItem(todoItem)
         })
         .catch((error) => {
           // TODO handle this
           console.log(error);
         });
+        e.target.reset();
     }
 
     setAxiosHeaders() {

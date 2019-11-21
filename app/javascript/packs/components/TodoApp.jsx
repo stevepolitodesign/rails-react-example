@@ -40,7 +40,7 @@ class TodoApp extends React.Component {
   }
 
   addTodoItem(todoItem) {
-    const todo_items = [...this.state.todo_items, todoItem]
+    const todo_items = [todoItem, ...this.state.todo_items]
     this.setState({todo_items})
   }
 
