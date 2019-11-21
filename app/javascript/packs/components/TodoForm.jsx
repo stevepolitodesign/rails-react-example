@@ -14,7 +14,6 @@ class TodoForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(e);
         this.setAxiosHeaders();
         axios.post('/api/v1/todo_items', {
           todo_item: {
@@ -26,8 +25,10 @@ class TodoForm extends React.Component {
         .then( (response) => {
           const todoItem = response.data
           this.props.addTodoItem(todoItem);
+          e.currentTarget.reset();
         })
         .catch((error) => {
+          // TODO handle this
           console.log(error);
         });
     }

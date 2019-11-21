@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom'
 
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
+import { throws } from 'assert';
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
         todo_items: [],
         current_user: {}
-      };
+    };
+    this.addTodoItem = this.addTodoItem.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +40,8 @@ class TodoApp extends React.Component {
   }
 
   addTodoItem(todoItem) {
-    console.log(todoItem);
+    const todo_items = [...this.state.todo_items, todoItem]
+    this.setState({todo_items})
   }
 
   render() {
