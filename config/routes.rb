@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   end
   root "pages#home"
 
-  namespace :api do
+  namespace :api, defaults: { format: :json } do 
     namespace :v1 do
-      resources :todo_items, only: [:index, :show, :create, :update, :destroy], defaults: { format: :json }
-      get '/current_user', to: 'users#current_user', as: 'current_user', defaults: { format: :json }
+      resources :todo_items, only: [:index, :show, :create, :update, :destroy]
+      get '/current_user', to: 'users#current_user', as: 'current_user'
     end
   end
 
