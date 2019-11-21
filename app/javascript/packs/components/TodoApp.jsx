@@ -43,6 +43,8 @@ class TodoApp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(e)
+    // Make Post Request to /api/v1/todo_items
+      // Use these values todo_item[title], todo_item[complete], complete[user_id]
   }
 
   render() {
