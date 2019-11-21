@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
@@ -42,7 +43,21 @@ class TodoApp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e)
+
+    axios.post('/api/v1/todo_items', {
+      todo_item: {
+        title: 'a hard coded to do item',
+        complete: false,
+        user_id: 1
+      }
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
     // Make Post Request to /api/v1/todo_items
       // Use these values todo_item[title], todo_item[complete], complete[user_id]
   }
