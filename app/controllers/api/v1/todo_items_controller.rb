@@ -22,9 +22,10 @@ class Api::V1::TodoItemsController < ApplicationController
   
     def edit
     end
-  
+    
+    # TODO: Need to validate that the current user is creating the todo item
     def create
-      @todo_item = current_user.todo_item.build(todo_item_params)
+      @todo_item = TodoItem.new(todo_item_params)
   
       respond_to do |format|
         if @todo_item.save
@@ -63,6 +64,6 @@ class Api::V1::TodoItemsController < ApplicationController
       end
   
       def todo_item_params
-        params.require(:post).permit(:title, :complete, :user_id)
+        params.require(:todo_item).permit(:title, :complete, :user_id)
       end    
 end

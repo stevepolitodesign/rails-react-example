@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import axios from 'axios'
 
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
-
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +40,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
-        <TodoForm />
+        <TodoForm currentUser={this.state.current_user} />
         { this.state.todo_items.map( todo_item => <TodoItem key={todo_item.id} todo_item={todo_item}/>) }
       </>
     );
