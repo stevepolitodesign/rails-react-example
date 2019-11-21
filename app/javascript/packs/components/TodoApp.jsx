@@ -1,5 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+import TodoIem from './TodoItem';
+
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
@@ -23,9 +26,9 @@ class TodoApp extends React.Component {
 
   render() {
     return (
-      <ul>
-          { this.state.todo_items.map( todo_item => <li key={todo_item.id}>{todo_item.title}</li>) }
-      </ul>
+      <>
+        { this.state.todo_items.map( todo_item => <TodoIem todo_item={todo_item}/>) }
+      </>
     );
   }
 }
