@@ -63,6 +63,6 @@ class Api::V1::TodoItemsController < ApplicationController
       end
   
       def todo_item_params
-        params.require(:post).permit(:title, :complete)
+        params.require(:post).permit(:title, :complete, :user_id)
       end    
 end
