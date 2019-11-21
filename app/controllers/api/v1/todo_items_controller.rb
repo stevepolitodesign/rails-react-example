@@ -29,7 +29,7 @@ class Api::V1::TodoItemsController < ApplicationController
   
       respond_to do |format|
         if @todo_item.save
-          format.json { render :show, status: :created, location: @todo_item }
+          format.json { render :show, status: :created, location: api_v1_todo_item_path(@todo_item) }
         else
           format.json { render json: @todo_item.errors, status: :unprocessable_entity }
         end
