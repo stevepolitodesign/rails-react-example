@@ -8,7 +8,10 @@ import TodoItem from './TodoItem'
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { todo_items: [] };
+    this.state = { 
+        todo_items: [],
+        user: {}
+      };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,6 +28,8 @@ class TodoApp extends React.Component {
       console.log(error);
     }
   }
+
+
 
   handleSubmit(e) {
     e.preventDefault();
