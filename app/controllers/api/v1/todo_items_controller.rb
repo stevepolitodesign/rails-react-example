@@ -31,6 +31,7 @@ class Api::V1::TodoItemsController < ApplicationController
         if @todo_item.save
           format.json { render :show, status: :created, location: api_v1_todo_item_path(@todo_item) }
         else
+          # TODO: Handle errors
           format.json { render json: @todo_item.errors, status: :unprocessable_entity }
         end
       end
@@ -39,8 +40,9 @@ class Api::V1::TodoItemsController < ApplicationController
     def update
       respond_to do |format|
         if @todo_item.update(todo_item_params)
-          format.json { render :show, status: :ok, location: @todo_item }
+          format.json { render :show, status: :ok, location: api_v1_todo_item_path(@todo_item) }
         else
+          # TODO: Handle errors
           format.json { render json: @todo_item.errors, status: :unprocessable_entity }
         end
       end
