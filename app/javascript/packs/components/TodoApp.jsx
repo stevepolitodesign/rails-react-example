@@ -5,7 +5,6 @@ import axios from 'axios'
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
 
-
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +42,10 @@ class TodoApp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    // https://medium.com/@zayneabraham/ruby-on-rails-csrf-protection-with-react-js-65dd84b8edad
+    const csrfToken = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
 
     axios.post('/api/v1/todo_items', {
       todo_item: {
