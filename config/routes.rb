@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :todo_items, defaults: { format: :json }
+      get '/current_user', to: 'users#current_user', as: 'current_user', defaults: { format: :json }
     end
   end
 
