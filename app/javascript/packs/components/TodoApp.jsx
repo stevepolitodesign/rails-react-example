@@ -10,13 +10,14 @@ class TodoApp extends React.Component {
     super(props);
     this.state = { 
         todo_items: [],
-        user: {}
+        current_user: {}
       };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
     this.getToDoItem();
+    this.getCurrentUser();
   }
 
   async getToDoItem() {
@@ -29,7 +30,15 @@ class TodoApp extends React.Component {
     }
   }
 
-
+  async getCurrentUser() {
+    try {
+      const response = await fetch('/api/v1/current_user');
+      const current_user = await response.json();
+      this.setState({current_user})
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   handleSubmit(e) {
     e.preventDefault();
