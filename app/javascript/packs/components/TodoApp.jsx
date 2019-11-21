@@ -16,11 +16,11 @@ class TodoApp extends React.Component {
   }
 
   componentDidMount() {
-    this.getToDoItem();
+    this.getToDoItems();
     this.getCurrentUser();
   }
 
-  async getToDoItem() {
+  async getToDoItems() {
     try {
       const response = await fetch('/api/v1/todo_items');
       const todo_items = await response.json();
@@ -42,11 +42,7 @@ class TodoApp extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
-    // https://medium.com/@zayneabraham/ruby-on-rails-csrf-protection-with-react-js-65dd84b8edad
-    const csrfToken = document.querySelector('[name=csrf-token]').content
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
-
+    this.setAxiosHeaders();
     axios.post('/api/v1/todo_items', {
       todo_item: {
         title: 'a hard coded to do item',
@@ -54,15 +50,18 @@ class TodoApp extends React.Component {
         user_id: 1
       }
     })
-    .then(function (response) {
+    .then( (response) => {
       console.log(response);
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
+  }
 
-    // Make Post Request to /api/v1/todo_items
-      // Use these values todo_item[title], todo_item[complete], complete[user_id]
+  setAxiosHeaders() {
+    // https://medium.com/@zayneabraham/ruby-on-rails-csrf-protection-with-react-js-65dd84b8edad
+    const csrfToken = document.querySelector('[name=csrf-token]').content
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
   }
 
   render() {
