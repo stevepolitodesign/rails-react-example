@@ -14,15 +14,7 @@ class Api::V1::TodoItemsController < ApplicationController
           format.json { render :unauthorized, status: 401 }
         end
       end
-    end
-  
-    def new
-      @todo_item = current_user.todo_item.build
-    end
-  
-    def edit
-    end
-    
+    end    
     
     def create
       @todo_item = TodoItem.new(todo_item_params)
