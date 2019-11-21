@@ -6,7 +6,10 @@ const TodoItem = (props) => {
     return (
         <div index={id}>
             <input type="text" value={title} />
-            <input type="boolean" checked={complete} type="checkbox" />
+            <label>
+                Complete:
+                <input type="boolean" checked={complete} type="checkbox" />
+            </label>
         </div>
     )
 }
