@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ToDdoItem = (props) => {
+const TodoItem = (props) => {
     const {id, title } = props.todo_item
     return (
-        <div key={id}>{title}</div>
+        <div index={id}>{title}</div>
     )
 }
 
-export default ToDdoItem
+export default TodoItem
 
-ToDdoItem.propTypes = {
+TodoItem.propTypes = {
     todo_item: PropTypes.object.isRequired
 };

@@ -1,12 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import TodoIem from './TodoItem';
+import TodoForm from './TodoForm'
+import TodoItem from './TodoItem'
+
 
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { todo_items: [] };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -21,13 +24,18 @@ class TodoApp extends React.Component {
     } catch (error) {
       console.log(error);
     }
+  }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(e)
   }
 
   render() {
     return (
       <>
-        { this.state.todo_items.map( todo_item => <TodoIem todo_item={todo_item}/>) }
+        <TodoForm handleSubmit={this.handleSubmit} />
+        { this.state.todo_items.map( todo_item => <TodoItem key={todo_item.id} todo_item={todo_item}/>) }
       </>
     );
   }
