@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import axios from 'axios'
 class TodoForm extends React.Component {
+
     constructor(props){
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -10,6 +11,7 @@ class TodoForm extends React.Component {
         this.currentUserRef = React.createRef();
         this.completeRef = React.createRef();
     }
+
     handleSubmit(e) {
         e.preventDefault();
         console.log(e);
@@ -22,7 +24,8 @@ class TodoForm extends React.Component {
           }
         })
         .then( (response) => {
-          console.log(response);
+          const todoItem = response.data
+          this.props.addTodoItem(todoItem);
         })
         .catch((error) => {
           console.log(error);
@@ -36,7 +39,7 @@ class TodoForm extends React.Component {
 
     render() {
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} >
                 <input type="text" name="title" ref={this.titleRef} required />
                 <button>Add To Do Item</button>
             </form>

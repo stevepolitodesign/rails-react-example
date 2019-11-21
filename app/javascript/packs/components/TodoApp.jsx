@@ -37,10 +37,14 @@ class TodoApp extends React.Component {
     }
   }
 
+  addTodoItem(todoItem) {
+    console.log(todoItem);
+  }
+
   render() {
     return (
       <>
-        <TodoForm currentUser={this.state.current_user} />
+        <TodoForm currentUser={this.state.current_user} addTodoItem={this.addTodoItem} />
         { this.state.todo_items.map( todo_item => <TodoItem key={todo_item.id} todo_item={todo_item}/>) }
       </>
     );
