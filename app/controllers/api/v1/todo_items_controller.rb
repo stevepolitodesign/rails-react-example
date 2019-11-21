@@ -23,18 +23,26 @@ class Api::V1::TodoItemsController < ApplicationController
     def edit
     end
     
-    # TODO: Need to validate that the current user is creating the todo item
+    
     def create
       @todo_item = TodoItem.new(todo_item_params)
-  
-      respond_to do |format|
-        if @todo_item.save
-          format.json { render :show, status: :created, location: api_v1_todo_item_path(@todo_item) }
-        else
-          # TODO: Handle errors
-          format.json { render json: @todo_item.errors, status: :unprocessable_entity }
+
+      # TODO: DRY this up
+      if authorized?
+        respond_to do |format|
+          if @todo_item.save
+            format.json { render :show, status: :created, location: api_v1_todo_item_path(@todo_item) }
+          else
+            # TODO: Handle errors
+            format.json { render json: @todo_item.errors, status: :unprocessable_entity }
+          end
+        end
+      else
+        respond_to do |format|
+          format.json { render :unauthorized, status: 401 }
         end
       end
+      
     end
   
     def update
