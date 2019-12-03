@@ -17,8 +17,7 @@ class TodoForm extends React.Component {
         axios.post('/api/v1/todo_items', {
           todo_item: {
             title: this.titleRef.current.value,
-            complete: false,
-            user_id: this.props.currentUser.id
+            complete: false
           }
         })
         .then( (response) => {
@@ -49,7 +48,3 @@ class TodoForm extends React.Component {
 }
 
 export default TodoForm
-
-TodoForm.propTypes = {
-    currentUser: PropTypes.object.isRequired
-};

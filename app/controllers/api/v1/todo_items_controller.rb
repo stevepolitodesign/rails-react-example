@@ -17,7 +17,7 @@ class Api::V1::TodoItemsController < ApplicationController
     end    
     
     def create
-      @todo_item = TodoItem.new(todo_item_params)
+      @todo_item = current_user.todo_item.build(todo_item_params)
 
       # TODO: DRY this up
       if authorized?
@@ -66,6 +66,6 @@ class Api::V1::TodoItemsController < ApplicationController
       end
   
       def todo_item_params
-        params.require(:todo_item).permit(:title, :complete, :user_id)
+        params.require(:todo_item).permit(:title, :complete)
       end    
 end

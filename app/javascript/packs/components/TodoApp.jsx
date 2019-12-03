@@ -9,14 +9,12 @@ class TodoApp extends React.Component {
     super(props);
     this.state = { 
         todo_items: [],
-        current_user: {}
     };
     this.addTodoItem = this.addTodoItem.bind(this);
   }
 
   componentDidMount() {
     this.getToDoItems();
-    this.getCurrentUser();
   }
 
   async getToDoItems() {
@@ -24,16 +22,6 @@ class TodoApp extends React.Component {
       const response = await fetch('/api/v1/todo_items');
       const todo_items = await response.json();
       this.setState({todo_items})
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async getCurrentUser() {
-    try {
-      const response = await fetch('/api/v1/current_user');
-      const current_user = await response.json();
-      this.setState({current_user})
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +35,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
-        <TodoForm currentUser={this.state.current_user} addTodoItem={this.addTodoItem} />
+        <TodoForm addTodoItem={this.addTodoItem} />
         { this.state.todo_items.map( todo_item => <TodoItem key={todo_item.id} todo_item={todo_item}/>) }
       </>
     );
