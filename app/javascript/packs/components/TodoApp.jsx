@@ -11,6 +11,7 @@ class TodoApp extends React.Component {
         todoItems: [],
     };
     this.addTodoItem = this.addTodoItem.bind(this);
+    this.updateTodoItem = this.updateTodoItem.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +35,8 @@ class TodoApp extends React.Component {
   }
 
   updateTodoItem(todoItem) {
-    console.log(todoItem)
+    const todoItems = [...this.state.todoItems];
+    console.log(todoItems);
   }
 
   render() {
