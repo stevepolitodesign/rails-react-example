@@ -17,7 +17,7 @@ class Api::V1::TodoItemsController < ApplicationController
     end    
     
     def create
-      @todo_item = current_user.todo_item.build(todo_item_params)
+      @todo_item = current_user.todo_items.build(todo_item_params)
 
       # TODO: DRY this up
       if authorized?
