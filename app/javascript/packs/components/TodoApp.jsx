@@ -17,10 +17,6 @@ class TodoApp extends React.Component {
     this.getToDoItems();
   }
 
-  componentDidUpdate() {
-    console.log('updated');
-  }
-
   async getToDoItems() {
     try {
       const response = await fetch('/api/v1/todo_items');
@@ -41,10 +37,10 @@ class TodoApp extends React.Component {
     const { id, title, complete, updated_at } = todoItem;
     const todoItems = [...this.state.todoItems];
     const todoItemIndex = todoItems.findIndex(todoItem => todoItem.id === id);
-    // todoItems[todoItemIndex].title = title;
-    // todoItems[todoItemIndex].complete = complete;
-    // todoItem[todoItemIndex].updated_at = updated_at;
-    todoItems[todoItemIndex] = todoItem
+    // TODO: clean this up
+    todoItems[todoItemIndex].title = title;
+    todoItems[todoItemIndex].complete = complete;
+    todoItem[todoItemIndex].updated_at = updated_at;
     this.setState({todoItems});
   }
 
