@@ -16,7 +16,7 @@ class TodoItem extends React.Component {
         setAxiosHeaders();
         axios.put(`/api/v1/todo_items/${this.todoItem.id}`, {
           todo_item: {
-            title: 'UPDATED TITLE',
+            title: new Date,
             complete: true
           }
         })
