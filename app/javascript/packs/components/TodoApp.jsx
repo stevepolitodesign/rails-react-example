@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
-import { throws } from 'assert';
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
