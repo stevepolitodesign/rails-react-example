@@ -8,7 +8,7 @@ class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-        todo_items: [],
+        todoItems: [],
     };
     this.addTodoItem = this.addTodoItem.bind(this);
   }
@@ -20,23 +20,28 @@ class TodoApp extends React.Component {
   async getToDoItems() {
     try {
       const response = await fetch('/api/v1/todo_items');
-      const todo_items = await response.json();
-      this.setState({todo_items})
+      const todoItems = await response.json();
+      this.setState({todoItems})
     } catch (error) {
       console.log(error);
     }
   }
 
   addTodoItem(todoItem) {
-    const todo_items = [todoItem, ...this.state.todo_items]
-    this.setState({todo_items})
+    // TODO: Update sort order
+    const todoItems = [todoItem, ...this.state.todoItems]
+    this.setState({todoItems})
+  }
+
+  updateTodoItem(todoItem) {
+    console.log(todoItem)
   }
 
   render() {
     return (
       <>
         <TodoForm addTodoItem={this.addTodoItem} />
-        { this.state.todo_items.map( todo_item => <TodoItem key={todo_item.id} todo_item={todo_item}/>) }
+        { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} />) }
       </>
     );
   }

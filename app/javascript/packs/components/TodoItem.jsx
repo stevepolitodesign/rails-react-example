@@ -7,29 +7,30 @@ import setAxiosHeaders from './AxiosHeaders'
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
-        this.todo_item = this.props.todo_item
+        this.todoItem = this.props.todoItem
         this.handleChange = this.handleChange.bind(this);
         this.inputRef = React.createRef();
         this.completedRef = React.createRef();
     }
-    handleChange(e) {
+    handleChange() {
         setAxiosHeaders();
-        axios.put(`/api/v1/todo_items/${this.todo_item.id}`, {
+        axios.put(`/api/v1/todo_items/${this.todoItem.id}`, {
           todo_item: {
             title: 'UPDATED TITLE',
             complete: true
           }
         })
         .then( (response) => {
-            console.log(response);
+            const todoItem = response.data
+            this.props.updateTodoItem(todoItem)
         })
         .catch((error) => {
-          // TODO handle this
-          console.log(error);
-        });        
+            // TODO handle this
+            console.log(error);
+        });      
     }
     render(){
-        const { id, title, complete } = this.todo_item;
+        const { id, title, complete } = this.todoItem;
         return (
             <div index={id}>
                 <input type="text" value={title} onChange={this.handleChange} ref={this.inputRef} />
@@ -45,5 +46,5 @@ class TodoItem extends React.Component {
 export default TodoItem
 
 TodoItem.propTypes = {
-    todo_item: PropTypes.object.isRequired
+    todoItem: PropTypes.object.isRequired
 };
