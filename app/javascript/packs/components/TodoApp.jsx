@@ -38,7 +38,11 @@ class TodoApp extends React.Component {
     const { id, title, complete } = todoItem;
     const todoItems = [...this.state.todoItems];
     const todoItemIndex = todoItems.findIndex(todoItem => todoItem.id === id);
-    console.log(todoItemIndex);
+    // TODO: clean this up
+    todoItems[todoItemIndex].title = title;
+    todoItems[todoItemIndex].complete = complete;
+    // TODO: add updated at
+    this.setState({todoItems});
   }
 
 
