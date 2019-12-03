@@ -42,7 +42,6 @@ class TodoApp extends React.Component {
     todoItems[todoItemIndex].title = title;
     todoItems[todoItemIndex].complete = complete;
     todoItem[todoItemIndex].updated_at = updated_at;
-    // TODO: add updated at
     this.setState({todoItems});
   }
 
