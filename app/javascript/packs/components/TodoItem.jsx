@@ -14,11 +14,10 @@ class TodoItem extends React.Component {
     }
     handleChange() {
         setAxiosHeaders();
-        console.log(this.completedRef.current.value);
         axios.put(`/api/v1/todo_items/${this.todoItem.id}`, {
           todo_item: {
             title: this.inputRef.current.value,
-            complete: this.completedRef.current.value
+            complete: this.completedRef.current.checked
           }
         })
         .then( (response) => {
