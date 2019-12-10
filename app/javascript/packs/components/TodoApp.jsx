@@ -8,9 +8,11 @@ class TodoApp extends React.Component {
     super(props);
     this.state = { 
         todoItems: [],
+        errorMessage: null
     };
     this.createTodoItem = this.createTodoItem.bind(this);
     this.updateTodoItem = this.updateTodoItem.bind(this);
+    this.handleErrors = this.handleErrors.bind(this);
   }
 
   componentDidMount() {
@@ -44,12 +46,15 @@ class TodoApp extends React.Component {
     this.setState({todoItems});
   }
 
+  handleErrors(errorMessage) {
+    this.setState({errorMessage})
+  }
 
   render() {
     return (
       <>
         <TodoForm createTodoItem={this.createTodoItem} />
-        { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} />) }
+        { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} handleErrors={this.handleErrors}/>) }
       </>
     );
   }

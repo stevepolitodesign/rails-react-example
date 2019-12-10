@@ -27,6 +27,7 @@ class TodoItem extends React.Component {
         .catch((error) => {
             // TODO handle this
             console.log(error);
+            this.props.handleErrors('there was an error');
         });      
     }
     render(){
