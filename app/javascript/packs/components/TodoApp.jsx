@@ -15,18 +15,21 @@ class TodoApp extends React.Component {
     this.updateTodoItem = this.updateTodoItem.bind(this);
     this.handleErrors = this.handleErrors.bind(this);
     this.clearErrors = this.clearErrors.bind(this);
+    this.getToDoItems = this.getToDoItems.bind(this);
   }
 
   componentDidMount() {
     this.getToDoItems();
   }
 
+  // TODO: Maybe use Axios fot better compatibility
   async getToDoItems() {
     try {
       const response = await fetch('/api/v1/todo_items');
       const todoItems = await response.json();
       this.setState({todoItems})
     } catch (error) {
+      // Display errors
       console.log(error);
     }
   }
@@ -62,8 +65,8 @@ class TodoApp extends React.Component {
     return (
       <>
         {this.state.errorMessage && <ErrorMessage errorMessage={this.state.errorMessage}/>}
-        <TodoForm createTodoItem={this.createTodoItem} handleErrors={this.handleErrors} clearErrors={this.clearErrors}/>
-        { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} handleErrors={this.handleErrors} clearErrors={this.clearErrors}/>) }
+        <TodoForm createTodoItem={this.createTodoItem} handleErrors={this.handleErrors} clearErrors={this.clearErrors} />
+        { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} handleErrors={this.handleErrors} clearErrors={this.clearErrors} getToDoItems={this.getToDoItems}/>) }
       </>
     );
   }
