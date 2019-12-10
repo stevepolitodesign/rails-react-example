@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import ErrorMessage from './ErrorMessage'
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
 class TodoApp extends React.Component {
@@ -53,6 +54,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
+        {this.state.errorMessage && <ErrorMessage/>}
         <TodoForm createTodoItem={this.createTodoItem} />
         { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} handleErrors={this.handleErrors}/>) }
       </>
