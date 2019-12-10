@@ -22,6 +22,7 @@ class TodoItem extends React.Component {
         })
         .then( (response) => {
             const todoItem = response.data
+            this.props.clearErrors();
             this.props.updateTodoItem(todoItem)
         })
         .catch((error) => {
