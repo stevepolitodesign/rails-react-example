@@ -35,7 +35,6 @@ class TodoApp extends React.Component {
     }
 
     createTodoItem(todoItem) {
-        // TODO: Update sort order
         const todoItems = [todoItem, ...this.state.todoItems]
         this.setState({ todoItems })
     }

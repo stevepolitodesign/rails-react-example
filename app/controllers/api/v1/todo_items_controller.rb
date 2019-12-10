@@ -3,7 +3,6 @@ class Api::V1::TodoItemsController < ApplicationController
     before_action :set_todo_item, only: [:show, :edit, :update, :destroy]
 
     def index
-      # TODO: Sort cronologically
       @todo_items = current_user.todo_items.all
     end
   

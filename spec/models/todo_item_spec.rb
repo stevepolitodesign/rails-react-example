@@ -28,4 +28,12 @@ RSpec.describe TodoItem, type: :model do
     end
   end
 
+  describe "order scope" do
+    let!(:old_todo_item) { FactoryBot.create(:todo_item, created_at: Time.now - 1.day) }
+    let!(:future_todo_item) { FactoryBot.create(:todo_item, created_at: Time.now + 1.day) }
+    it "short sort todo items in descending order" do
+      expect(TodoItem.first).to eq(future_todo_item)
+    end
+  end
+
 end
