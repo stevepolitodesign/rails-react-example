@@ -52,7 +52,7 @@ class TodoApp extends React.Component {
   }
 
   handleErrors(errorMessage) {
-    this.setState({ errorMessage });
+    this.setState({ errorMessage })
   }
 
   clearErrors() {

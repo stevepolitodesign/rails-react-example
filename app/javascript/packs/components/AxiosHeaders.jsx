@@ -5,4 +5,4 @@ const setAxiosHeaders = () => {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
 }
 
-export default setAxiosHeaders;
+export default setAxiosHeaders
