@@ -23,7 +23,7 @@ class TodoForm extends React.Component {
         })
         .then( (response) => {
           const todoItem = response.data
-          this.props.addTodoItem(todoItem)
+          this.props.createTodoItem(todoItem)
         })
         .catch((error) => {
           // TODO handle this

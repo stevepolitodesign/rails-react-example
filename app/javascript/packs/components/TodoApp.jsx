@@ -9,7 +9,7 @@ class TodoApp extends React.Component {
     this.state = { 
         todoItems: [],
     };
-    this.addTodoItem = this.addTodoItem.bind(this);
+    this.createTodoItem = this.createTodoItem.bind(this);
     this.updateTodoItem = this.updateTodoItem.bind(this);
   }
 
@@ -27,7 +27,7 @@ class TodoApp extends React.Component {
     }
   }
 
-  addTodoItem(todoItem) {
+  createTodoItem(todoItem) {
     // TODO: Update sort order
     const todoItems = [todoItem, ...this.state.todoItems]
     this.setState({todoItems})
@@ -48,7 +48,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
-        <TodoForm addTodoItem={this.addTodoItem} />
+        <TodoForm createTodoItem={this.createTodoItem} />
         { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} />) }
       </>
     );
