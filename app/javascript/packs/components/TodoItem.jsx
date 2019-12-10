@@ -33,15 +33,18 @@ class TodoItem extends React.Component {
     }
     handleDestroy() {
         setAxiosHeaders()
-        axios
-            .delete(`/api/v1/todo_items/${this.todoItem.id}`)
-            .then(response => {
-                console.log(response)
-                this.props.getToDoItems()
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        const confirmation = confirm('Are you sure?')
+        if (confirmation) {
+            axios
+                .delete(`/api/v1/todo_items/${this.todoItem.id}`)
+                .then(response => {
+                    console.log(response)
+                    this.props.getToDoItems()
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
     render() {
         const { title, complete } = this.todoItem
