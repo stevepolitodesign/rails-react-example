@@ -36,7 +36,8 @@ class Api::V1::TodoItemsController < ApplicationController
       end
       
     end
-  
+    
+    # TODO: Authorize this action
     def update
       respond_to do |format|
         if @todo_item.update(todo_item_params)
@@ -48,6 +49,7 @@ class Api::V1::TodoItemsController < ApplicationController
       end
     end
 
+    # TODO: Authorize this action
     def destroy
       @todo_item.destroy
       respond_to do |format|
