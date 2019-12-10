@@ -47,5 +47,6 @@ export default TodoItem
 
 TodoItem.propTypes = {
     todoItem: PropTypes.object.isRequired,
-    updateTodoItem: PropTypes.func.isRequired
+    updateTodoItem: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
 };
