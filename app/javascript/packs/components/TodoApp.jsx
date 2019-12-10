@@ -75,7 +75,7 @@ class TodoApp extends React.Component {
                     clearErrors={this.clearErrors}
                 />
                 {this.state.todoItems && (
-                    <div class="table-responsive">
+                    <div className="table-responsive">
                         <table className="table">
                             <thead>
                                 <tr>
