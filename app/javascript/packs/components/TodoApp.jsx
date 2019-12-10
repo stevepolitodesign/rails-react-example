@@ -74,16 +74,31 @@ class TodoApp extends React.Component {
                     handleErrors={this.handleErrors}
                     clearErrors={this.clearErrors}
                 />
-                {this.state.todoItems.map(todoItem => (
-                    <TodoItem
-                        key={todoItem.id}
-                        todoItem={todoItem}
-                        updateTodoItem={this.updateTodoItem}
-                        handleErrors={this.handleErrors}
-                        clearErrors={this.clearErrors}
-                        getToDoItems={this.getToDoItems}
-                    />
-                ))}
+                {this.state.todoItems && (
+                    <div class="table-responsive">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">To Do</th>
+                                    <th scope="col">Complete</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.todoItems.map(todoItem => (
+                                    <TodoItem
+                                        key={todoItem.id}
+                                        todoItem={todoItem}
+                                        updateTodoItem={this.updateTodoItem}
+                                        handleErrors={this.handleErrors}
+                                        clearErrors={this.clearErrors}
+                                        getToDoItems={this.getToDoItems}
+                                    />
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </>
         )
     }

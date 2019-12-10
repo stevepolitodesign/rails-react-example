@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import setAxiosHeaders from './AxiosHeaders'
 
+import 'bootstrap'
+
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
@@ -49,16 +51,18 @@ class TodoItem extends React.Component {
     render() {
         const { title, complete } = this.todoItem
         return (
-            <div>
-                <input
-                    type="text"
-                    value={title}
-                    disabled={complete}
-                    onChange={this.handleChange}
-                    ref={this.inputRef}
-                />
-                <label>
-                    Complete:
+            <tr>
+                <td>
+                    <input
+                        type="text"
+                        value={title}
+                        disabled={complete}
+                        onChange={this.handleChange}
+                        ref={this.inputRef}
+                        className="form-control"
+                    />
+                </td>
+                <td>
                     <input
                         type="boolean"
                         checked={complete}
@@ -66,9 +70,16 @@ class TodoItem extends React.Component {
                         onChange={this.handleChange}
                         ref={this.completedRef}
                     />
-                </label>
-                <button onClick={this.handleDestroy}>Delete</button>
-            </div>
+                </td>
+                <td>
+                    <button
+                        onClick={this.handleDestroy}
+                        className="btn btn-outline-danger"
+                    >
+                        Delete
+                    </button>
+                </td>
+            </tr>
         )
     }
 }
