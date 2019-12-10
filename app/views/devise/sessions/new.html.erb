@@ -1,5 +1,8 @@
 <h2>Log in</h2>
-
+<p>User the following accounts to test the application.</p>
+<% User.all.each do |user| %>
+  <p><strong>Email: </strong><%= user.email %> <strong>Password: </strong>password</p>
+<% end %>
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
