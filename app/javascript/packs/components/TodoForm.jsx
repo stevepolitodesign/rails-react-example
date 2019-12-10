@@ -45,6 +45,7 @@ class TodoForm extends React.Component {
 export default TodoForm
 
 TodoForm.propTypes = {
+    createTodoItem: PropTypes.func.isRequired,
     handleErrors: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
 }
