@@ -34,9 +34,25 @@ class TodoForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" name="title" ref={this.titleRef} required />
-                <button>Add To Do Item</button>
+            <form onSubmit={this.handleSubmit} className="my-3">
+                <div className="form-row">
+                    <div className="form-group col-md-8">
+                        <input
+                            type="text"
+                            name="title"
+                            ref={this.titleRef}
+                            required
+                            className="form-control"
+                            id="title"
+                            placeholder="Write feature tests for this sample application..."
+                        />
+                    </div>
+                    <div className="form-group col-md-4">
+                        <button className="btn btn-outline-success btn-block">
+                            Add To Do Item
+                        </button>
+                    </div>
+                </div>
             </form>
         )
     }
