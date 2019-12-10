@@ -46,6 +46,7 @@ class TodoApp extends React.Component {
             todoItem => todoItem.id === id
         )
         // TODO: clean this up
+        // This doesn't work `todoItems[todoItemIndex] = { ...todoItem }`, nor does this `todoItems[todoItemIndex] = todoItem`
         todoItems[todoItemIndex].title = title
         todoItems[todoItemIndex].complete = complete
         todoItems[todoItemIndex].updated_at = updated_at
