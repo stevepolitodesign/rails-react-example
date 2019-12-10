@@ -47,7 +47,10 @@ console.log(people)
 
 ```
 bundle install
+yarn install
 rails db:create
+rails db:seed
+rails s
 ```
 
 ## Tests
