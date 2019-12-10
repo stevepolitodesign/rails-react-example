@@ -4,15 +4,16 @@ import PropTypes from 'prop-types'
 const ErrorMessage = (props) => {
     const { data } = props.errorMessage.response;
     const keys = Object.keys(data);
-    keys.forEach((key)=>{
-        console.log(key)
-        data[key].forEach((message)=>{
-            console.log(message);
-        })
-    })
     return(
-        keys.map((item) => {
-            <p>{item}</p>
+        keys.map((key)=>{
+            return (
+                <div key={new Date()}>
+                    <p>{key}</p>
+                    <ul>
+                        <li>{data[key].map( message => message)}</li>
+                    </ul>
+                </div>
+            )
         })
     )
 }
