@@ -6,4 +6,3 @@ const setAxiosHeaders = () => {
 }
 
 export default setAxiosHeaders;
-
