@@ -9,6 +9,7 @@ An example application build with Rails and React
 The `updateTodoItem` method in `app/javascript/packs/components/TodoApp.jsx` manually assigns the `title`, `complete` and `updated_at` values to the `todoItem` as seen below:
 
 ```
+const { id, title, complete, updated_at } = todoItem
 ...
 todoItems[todoItemIndex].title = title
 todoItems[todoItemIndex].complete = complete
