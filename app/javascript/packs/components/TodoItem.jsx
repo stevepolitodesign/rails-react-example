@@ -53,6 +53,7 @@ class TodoItem extends React.Component {
                 <input
                     type="text"
                     value={title}
+                    disabled={complete}
                     onChange={this.handleChange}
                     ref={this.inputRef}
                 />
