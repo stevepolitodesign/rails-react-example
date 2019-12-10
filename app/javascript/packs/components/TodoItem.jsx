@@ -25,9 +25,7 @@ class TodoItem extends React.Component {
             this.props.updateTodoItem(todoItem)
         })
         .catch((error) => {
-            // TODO handle this
-            console.log(error);
-            this.props.handleErrors('there was an error');
+            this.props.handleErrors(error);
         });      
     }
     render(){

@@ -54,7 +54,7 @@ class TodoApp extends React.Component {
   render() {
     return (
       <>
-        {this.state.errorMessage && <ErrorMessage/>}
+        {this.state.errorMessage && <ErrorMessage errorMessage={this.state.errorMessage}/>}
         <TodoForm createTodoItem={this.createTodoItem} />
         { this.state.todoItems.map( todoItem => <TodoItem key={todoItem.id} todoItem={todoItem} updateTodoItem={this.updateTodoItem} handleErrors={this.handleErrors}/>) }
       </>
