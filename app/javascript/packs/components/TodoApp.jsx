@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import ErrorMessage from './ErrorMessage'
 import TodoForm from './TodoForm'
+import TodoItems from './TodoItems'
 import TodoItem from './TodoItem'
 import Spinner from './Spinner'
 class TodoApp extends React.Component {
@@ -76,29 +77,18 @@ class TodoApp extends React.Component {
                     clearErrors={this.clearErrors}
                 />
                 {this.state.todoItems.length !== 0 && (
-                    <div className="table-responsive">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">To Do</th>
-                                    <th scope="col">Complete</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.todoItems.map(todoItem => (
-                                    <TodoItem
-                                        key={todoItem.id}
-                                        todoItem={todoItem}
-                                        updateTodoItem={this.updateTodoItem}
-                                        handleErrors={this.handleErrors}
-                                        clearErrors={this.clearErrors}
-                                        getToDoItems={this.getToDoItems}
-                                    />
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    <TodoItems>
+                        {this.state.todoItems.map(todoItem => (
+                            <TodoItem
+                                key={todoItem.id}
+                                todoItem={todoItem}
+                                updateTodoItem={this.updateTodoItem}
+                                handleErrors={this.handleErrors}
+                                clearErrors={this.clearErrors}
+                                getToDoItems={this.getToDoItems}
+                            />
+                        ))}
+                    </TodoItems>
                 )}
                 {this.state.todoItems.length === 0 && <Spinner />}
             </>
