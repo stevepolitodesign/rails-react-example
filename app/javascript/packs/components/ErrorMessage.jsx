@@ -6,7 +6,7 @@ const ErrorMessage = props => {
     const keys = Object.keys(data)
     return keys.map(key => {
         return (
-            <div key={new Date()}>
+            <div key={new Date()} className="alert alert-danger" role="alert">
                 <p>{key}</p>
                 <ul>
                     <li>{data[key].map(message => message)}</li>
