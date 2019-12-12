@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import ErrorMessage from './ErrorMessage'
 import TodoForm from './TodoForm'
 import TodoItem from './TodoItem'
+import Spinner from './Spinner'
 class TodoApp extends React.Component {
     constructor(props) {
         super(props)
@@ -99,13 +100,7 @@ class TodoApp extends React.Component {
                         </table>
                     </div>
                 )}
-                {this.state.todoItems.length === 0 && (
-                    <div className="d-flex align-items-center justify-content-center py-5">
-                        <div className="spinner-border" role="status">
-                            <span className="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                )}
+                {this.state.todoItems.length === 0 && <Spinner />}
             </>
         )
     }
