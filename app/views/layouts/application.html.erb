@@ -12,9 +12,8 @@
   </head>
 
   <body>
-    <%#  TODO: Make a shared partial for flash messages %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render "shared/navigation" %>
+    <%= render "shared/flash" %>
     <div class="container">
       <%= yield %>
     </div>

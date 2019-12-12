@@ -1,0 +1,7 @@
+<% flash.each do |key, value| %>
+    <div class="container">
+        <div class="alert <%= key == 'notice' ? 'alert-primary' : 'alert-danger' %>" role="alert">
+            <%= value %>
+        </div>
+    </div>
+<% end %>
