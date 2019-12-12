@@ -2,6 +2,9 @@
     <div class="container">
         <div class="alert <%= key == 'notice' ? 'alert-primary' : 'alert-danger' %>" role="alert">
             <%= value %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>            
         </div>
     </div>
 <% end %>
