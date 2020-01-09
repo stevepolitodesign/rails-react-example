@@ -26,6 +26,17 @@ todoItems[todoItemIndex] = { ...todoItem }
 todoItems[todoItemIndex] = todoItem
 ```
 
+```
+this.setState(state => {
+    todoItems: state.todoItems.map(item => {
+        if (item.id === todoItem.id) {
+            item = { ...todoItem }
+        }
+        return item
+    })
+})
+```
+
 This confuses me, because the following works as expected:
 
 ```
