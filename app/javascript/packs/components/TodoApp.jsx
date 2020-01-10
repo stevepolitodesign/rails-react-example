@@ -24,6 +24,10 @@ class TodoApp extends React.Component {
         this.getToDoItems()
     }
 
+    componentDidUpdate() {
+        console.log(this.state.todoItems)
+    }
+
     // TODO: Maybe use Axios fot better compatibility
     async getToDoItems() {
         try {
@@ -69,9 +73,11 @@ class TodoApp extends React.Component {
         })
         */
 
-        todoItems[todoItemIndex].title = title
-        todoItems[todoItemIndex].complete = complete
-        todoItems[todoItemIndex].updated_at = updated_at
+        // todoItems[todoItemIndex].title = title
+        // todoItems[todoItemIndex].complete = complete
+        // todoItems[todoItemIndex].updated_at = updated_at
+        // this.setState({ todoItems })
+        todoItems[todoItemIndex] = { ...todoItem }
         this.setState({ todoItems })
     }
 
