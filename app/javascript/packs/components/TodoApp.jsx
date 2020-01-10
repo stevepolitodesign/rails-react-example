@@ -24,6 +24,7 @@ class TodoApp extends React.Component {
         this.getToDoItems()
     }
 
+    // I run this to verify if the todoItems updated after calling updateTodoItem()
     componentDidUpdate() {
         console.log(this.state.todoItems)
     }
