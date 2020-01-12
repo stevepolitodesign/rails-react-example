@@ -13,12 +13,14 @@ class TodoApp extends React.Component {
             todoItems: [],
             errorMessage: null,
             isLoading: null,
+            hideCompletedTodoItems: false,
         }
         this.createTodoItem = this.createTodoItem.bind(this)
         this.updateTodoItem = this.updateTodoItem.bind(this)
         this.handleErrors = this.handleErrors.bind(this)
         this.clearErrors = this.clearErrors.bind(this)
         this.getToDoItems = this.getToDoItems.bind(this)
+        this.toggleCompletedTodoItems = this.toggleCompletedTodoItems.bind(this)
     }
 
     componentDidMount() {
@@ -38,6 +40,21 @@ class TodoApp extends React.Component {
             this.setState({ isLoading: true })
             console.log(error)
         }
+    }
+
+    toggleCompletedTodoItems() {
+        // if (!this.state.hideCompletedTodoItems) {
+        //     this.setState(previousState => {
+        //         hideCompletedTodoItems: true
+        //         todoItems: previousState.todoItems.filter(
+        //             todoItem => todoItem.complete === true
+        //         )
+        //     })
+        // } else {
+        //     this.getToDoItems()
+        //     this.setState({ hideCompletedTodoItems: false })
+        // }
+        console.log('clicked me!')
     }
 
     createTodoItem(todoItem) {
@@ -77,7 +94,9 @@ class TodoApp extends React.Component {
                     clearErrors={this.clearErrors}
                 />
                 {!this.state.isLoading && (
-                    <TodoItems>
+                    <TodoItems
+                        toggleCompletedTodoItems={this.toggleCompletedTodoItems}
+                    >
                         {this.state.todoItems.map(todoItem => (
                             <TodoItem
                                 key={todoItem.id}
