@@ -47,11 +47,9 @@ class TodoApp extends React.Component {
         this.setState({
             hideCompletedTodoItems: !this.state.hideCompletedTodoItems,
         })
-        if (this.state.hideCompletedTodoItems) {
-            this.hideCompletedTodoItems()
-        } else {
-            this.getToDoItems()
-        }
+        this.state.hideCompletedTodoItems
+            ? this.hideCompletedTodoItems()
+            : this.getToDoItems()
     }
 
     hideCompletedTodoItems() {
