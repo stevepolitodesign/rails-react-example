@@ -19,17 +19,17 @@ class TodoApp extends React.Component {
         this.updateTodoItem = this.updateTodoItem.bind(this)
         this.handleErrors = this.handleErrors.bind(this)
         this.clearErrors = this.clearErrors.bind(this)
-        this.getToDoItems = this.getToDoItems.bind(this)
+        this.getTodoItems = this.getTodoItems.bind(this)
         this.toggleCompletedTodoItems = this.toggleCompletedTodoItems.bind(this)
         this.hideCompletedTodoItems = this.hideCompletedTodoItems.bind(this)
     }
 
     componentDidMount() {
-        this.getToDoItems()
+        this.getTodoItems()
     }
 
     // TODO: Maybe use Axios fot better compatibility
-    async getToDoItems() {
+    async getTodoItems() {
         try {
             this.setState({ isLoading: true })
             const response = await fetch('/api/v1/todo_items')
@@ -49,7 +49,7 @@ class TodoApp extends React.Component {
         })
         this.state.hideCompletedTodoItems
             ? this.hideCompletedTodoItems()
-            : this.getToDoItems()
+            : this.getTodoItems()
     }
 
     hideCompletedTodoItems() {
@@ -107,7 +107,7 @@ class TodoApp extends React.Component {
                                 updateTodoItem={this.updateTodoItem}
                                 handleErrors={this.handleErrors}
                                 clearErrors={this.clearErrors}
-                                getToDoItems={this.getToDoItems}
+                                getTodoItems={this.getTodoItems}
                             />
                         ))}
                     </TodoItems>

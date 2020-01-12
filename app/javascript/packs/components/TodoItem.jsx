@@ -39,7 +39,7 @@ class TodoItem extends React.Component {
             axios
                 .delete(`/api/v1/todo_items/${this.props.todoItem.id}`)
                 .then(response => {
-                    this.props.getToDoItems()
+                    this.props.getTodoItems()
                 })
                 .catch(error => {
                     console.log(error)
@@ -88,5 +88,5 @@ TodoItem.propTypes = {
     todoItem: PropTypes.object.isRequired,
     updateTodoItem: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
-    getToDoItems: PropTypes.func.isRequired,
+    getTodoItems: PropTypes.func.isRequired,
 }
