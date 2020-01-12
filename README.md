@@ -1,6 +1,6 @@
 # Rails React Example
 
-An example application build with Rails and React
+An example application built with Rails and React
 
 ## Local Build
 
