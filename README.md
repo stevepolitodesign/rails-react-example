@@ -26,7 +26,6 @@ rspec f -d
 
 ## To Do
 
--   [ ] Refactor `updateTodoItem`
 -   [ ] Add ability to filter `complete` items
 -   [ ] Only load the `<Spinner/>` if content is loading, not if `this.state.todoItems.length === 0`, since it's possible a user could have no items.
     -   Add a `loading` key into `state`
