@@ -35,6 +35,7 @@ class TodoApp extends React.Component {
             this.setState({ isLoading: false })
         } catch (error) {
             // Display errors
+            this.setState({ isLoading: true })
             console.log(error)
         }
     }
