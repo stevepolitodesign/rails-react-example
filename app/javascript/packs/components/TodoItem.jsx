@@ -39,7 +39,6 @@ class TodoItem extends React.Component {
             axios
                 .delete(`/api/v1/todo_items/${this.props.todoItem.id}`)
                 .then(response => {
-                    console.log(response)
                     this.props.getToDoItems()
                 })
                 .catch(error => {
