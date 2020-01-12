@@ -46,39 +46,13 @@ class TodoApp extends React.Component {
         this.setState({ todoItems })
     }
 
-    updateTodoItem(todoItem) {
-        const { id, title, complete, updated_at } = todoItem
+    updateTodoItem(updatedTodoItem) {
+        const { id } = updatedTodoItem
         const todoItems = [...this.state.todoItems]
         const todoItemIndex = todoItems.findIndex(
             todoItem => todoItem.id === id
         )
-        // TODO: clean this up
-        // The following didn't work
-
-        /* 
-        Option 1
-        `todoItems[todoItemIndex] = { ...todoItem }`
-
-        Option 2
-        `todoItems[todoItemIndex] = todoItem`
-
-
-        Option 3
-        this.setState(state => {
-            todoItems: state.todoItems.map(item => {
-                if (item.id === todoItem.id) {
-                    item = { ...todoItem }
-                }
-                return item
-            })
-        })
-        */
-
-        // todoItems[todoItemIndex].title = title
-        // todoItems[todoItemIndex].complete = complete
-        // todoItems[todoItemIndex].updated_at = updated_at
-        // this.setState({ todoItems })
-        todoItems[todoItemIndex] = { ...todoItem }
+        todoItems[todoItemIndex] = { ...updatedTodoItem }
         this.setState({ todoItems })
     }
 

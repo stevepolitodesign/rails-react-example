@@ -9,7 +9,6 @@ import 'bootstrap'
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
-        this.todoItem = this.props.todoItem
         this.handleChange = this.handleChange.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
         this.inputRef = React.createRef()
@@ -18,16 +17,16 @@ class TodoItem extends React.Component {
     handleChange() {
         setAxiosHeaders()
         axios
-            .put(`/api/v1/todo_items/${this.todoItem.id}`, {
+            .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
                 todo_item: {
                     title: this.inputRef.current.value,
                     complete: this.completedRef.current.checked,
                 },
             })
             .then(response => {
-                const todoItem = response.data
+                const updatedTodoItem = response.data
                 this.props.clearErrors()
-                this.props.updateTodoItem(todoItem)
+                this.props.updateTodoItem(updatedTodoItem)
             })
             .catch(error => {
                 this.props.handleErrors(error)
@@ -38,7 +37,7 @@ class TodoItem extends React.Component {
         const confirmation = confirm('Are you sure?')
         if (confirmation) {
             axios
-                .delete(`/api/v1/todo_items/${this.todoItem.id}`)
+                .delete(`/api/v1/todo_items/${this.props.todoItem.id}`)
                 .then(response => {
                     console.log(response)
                     this.props.getToDoItems()
@@ -49,14 +48,14 @@ class TodoItem extends React.Component {
         }
     }
     render() {
-        const { title, complete } = this.todoItem
+        const { todoItem } = this.props
         return (
             <tr>
                 <td>
                     <input
                         type="text"
-                        value={title}
-                        disabled={complete}
+                        value={todoItem.title}
+                        disabled={todoItem.complete}
                         onChange={this.handleChange}
                         ref={this.inputRef}
                         className="form-control"
@@ -65,7 +64,7 @@ class TodoItem extends React.Component {
                 <td>
                     <input
                         type="boolean"
-                        checked={complete}
+                        checked={todoItem.complete}
                         type="checkbox"
                         onChange={this.handleChange}
                         ref={this.completedRef}
