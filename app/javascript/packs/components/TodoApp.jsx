@@ -12,6 +12,7 @@ class TodoApp extends React.Component {
         this.state = {
             todoItems: [],
             errorMessage: null,
+            isLoading: true,
         }
         this.createTodoItem = this.createTodoItem.bind(this)
         this.updateTodoItem = this.updateTodoItem.bind(this)
@@ -30,6 +31,7 @@ class TodoApp extends React.Component {
             const response = await fetch('/api/v1/todo_items')
             const todoItems = await response.json()
             this.setState({ todoItems })
+            this.setState({ isLoading: false })
         } catch (error) {
             // Display errors
             console.log(error)
@@ -72,7 +74,7 @@ class TodoApp extends React.Component {
                     handleErrors={this.handleErrors}
                     clearErrors={this.clearErrors}
                 />
-                {this.state.todoItems.length !== 0 && (
+                {!this.state.isLoading && (
                     <TodoItems>
                         {this.state.todoItems.map(todoItem => (
                             <TodoItem
@@ -86,7 +88,7 @@ class TodoApp extends React.Component {
                         ))}
                     </TodoItems>
                 )}
-                {this.state.todoItems.length === 0 && <Spinner />}
+                {this.state.isLoading && <Spinner />}
             </>
         )
     }
