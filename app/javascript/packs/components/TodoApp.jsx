@@ -43,6 +43,12 @@ class TodoApp extends React.Component {
     }
 
     toggleCompletedTodoItems() {
+        console.log('toggleCompletedTodoItems')
+        this.setState({
+            todoItems: this.state.todoItems.filter(
+                todoItem => todoItem.complete === false
+            ),
+        })
         // if (!this.state.hideCompletedTodoItems) {
         //     this.setState(previousState => {
         //         hideCompletedTodoItems: true
@@ -54,7 +60,6 @@ class TodoApp extends React.Component {
         //     this.getToDoItems()
         //     this.setState({ hideCompletedTodoItems: false })
         // }
-        console.log('clicked me!')
     }
 
     createTodoItem(todoItem) {
