@@ -49,7 +49,13 @@ class TodoItem extends React.Component {
     render() {
         const { todoItem } = this.props
         return (
-            <tr>
+            <tr
+                className={
+                    todoItem.complete && this.props.hideCompletedTodoItems
+                        ? `d-none`
+                        : null
+                }
+            >
                 <td>
                     <input
                         type="text"
@@ -89,4 +95,5 @@ TodoItem.propTypes = {
     updateTodoItem: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     getTodoItems: PropTypes.func.isRequired,
+    hideCompletedTodoItems: PropTypes.bool.isRequired,
 }

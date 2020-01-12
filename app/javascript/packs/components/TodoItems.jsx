@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 class TodoItems extends React.Component {
     constructor(props) {
         super(props)
@@ -30,3 +30,7 @@ class TodoItems extends React.Component {
     }
 }
 export default TodoItems
+
+TodoItems.propTypes = {
+    toggleCompletedTodoItems: PropTypes.func.isRequired,
+}
