@@ -12,7 +12,7 @@ class TodoApp extends React.Component {
         this.state = {
             todoItems: [],
             errorMessage: null,
-            isLoading: true,
+            isLoading: null,
         }
         this.createTodoItem = this.createTodoItem.bind(this)
         this.updateTodoItem = this.updateTodoItem.bind(this)
@@ -28,6 +28,7 @@ class TodoApp extends React.Component {
     // TODO: Maybe use Axios fot better compatibility
     async getToDoItems() {
         try {
+            this.setState({ isLoading: true })
             const response = await fetch('/api/v1/todo_items')
             const todoItems = await response.json()
             this.setState({ todoItems })
