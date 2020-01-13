@@ -90,7 +90,7 @@ class TodoItem extends React.Component {
                         className="form-control"
                     />
                 </td>
-                <td>
+                <td className="text-right">
                     <div className="form-check form-check-inline">
                         <input
                             type="boolean"
