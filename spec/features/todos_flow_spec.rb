@@ -2,9 +2,17 @@ require 'rails_helper'
 
 RSpec.feature "TodosFlows", type: :feature do
   describe "creating a todo item", js: true do
+    let(:user) { FactoryBot.create(:user) }
+    valid_todo_item = 'this is a new note'
     context "todo item is valid" do
       it "creates a new todo item on the top of the list" do
-        skip
+        login_as(user, :scope => :user)
+        visit root_path
+        fill_in('title', with: valid_todo_item)
+        click_button('Add To Do Item')
+        page
+        byebug
+        expect(find('.table > tbody > tr:first-of-type')).to have_content(valid_todo_item)
       end
     end
     context "todo item is not valid", js: true do
@@ -38,4 +46,5 @@ RSpec.feature "TodosFlows", type: :feature do
       skip
     end
   end
+
 end
