@@ -10,7 +10,6 @@
     "axios": "^0.19.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.4.1",
-    "bootstrap-icons": "^1.0.0-alpha2",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",
