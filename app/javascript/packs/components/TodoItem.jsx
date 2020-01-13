@@ -91,15 +91,23 @@ class TodoItem extends React.Component {
                     />
                 </td>
                 <td>
-                    <input
-                        type="boolean"
-                        checked={todoItem.complete}
-                        type="checkbox"
-                        onChange={this.handleChange}
-                        ref={this.completedRef}
-                    />
-                </td>
-                <td>
+                    <div className="form-check form-check-inline">
+                        <input
+                            type="boolean"
+                            checked={todoItem.complete}
+                            type="checkbox"
+                            onChange={this.handleChange}
+                            ref={this.completedRef}
+                            className="form-check-input"
+                            id={`complete-${todoItem.id}`}
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor={`complete-${todoItem.id}`}
+                        >
+                            Complete?
+                        </label>
+                    </div>
                     <button
                         onClick={this.handleDestroy}
                         className="btn btn-outline-danger"

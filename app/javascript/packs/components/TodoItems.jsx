@@ -10,23 +10,27 @@ class TodoItems extends React.Component {
     }
     render() {
         return (
-            <div className="table-responsive">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Status</th>
-                            <th scope="col">To Do</th>
-                            <th scope="col">
-                                <button onClick={this.handleClick}>
-                                    Complete
-                                </button>
-                            </th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>{this.props.children}</tbody>
-                </table>
-            </div>
+            <>
+                <hr />
+                <button
+                    className="btn btn-outline-primary btn-block mb-3"
+                    onClick={this.handleClick}
+                >
+                    Toggle Completed Items
+                </button>
+                <div className="table-responsive">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Status</th>
+                                <th scope="col">Item</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>{this.props.children}</tbody>
+                    </table>
+                </div>
+            </>
         )
     }
 }
