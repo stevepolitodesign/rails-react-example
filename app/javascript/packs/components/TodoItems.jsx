@@ -14,6 +14,7 @@ class TodoItems extends React.Component {
                 <table className="table">
                     <thead>
                         <tr>
+                            <th scope="col">Status</th>
                             <th scope="col">To Do</th>
                             <th scope="col">
                                 <button onClick={this.handleClick}>
