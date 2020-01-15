@@ -88,6 +88,7 @@ class TodoItem extends React.Component {
                         onChange={this.handleChange}
                         ref={this.inputRef}
                         className="form-control"
+                        id={`todoItem__title-${todoItem.id}`}
                     />
                 </td>
                 <td className="text-right">
