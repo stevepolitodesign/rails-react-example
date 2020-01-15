@@ -10,9 +10,8 @@ RSpec.feature "TodosFlows", type: :feature do
         visit root_path
         fill_in('title', with: valid_todo_item)
         click_button('Add To Do Item')
-        page
-        byebug
-        expect(find('.table > tbody > tr:first-of-type')).to have_content(valid_todo_item)
+        new_todo_item = find('.table > tbody > tr:first-of-type td:nth-child(2) input:first-of-type')
+        expect(new_todo_item.value).to eq(valid_todo_item)
       end
     end
     context "todo item is not valid", js: true do
