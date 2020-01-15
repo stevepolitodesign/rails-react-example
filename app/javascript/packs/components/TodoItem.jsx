@@ -54,8 +54,8 @@ class TodoItem extends React.Component {
                 className={`${
                     todoItem.complete && this.props.hideCompletedTodoItems
                         ? `d-none`
-                        : null
-                } ${todoItem.complete ? 'table-light' : null}`}
+                        : ''
+                } ${todoItem.complete ? 'table-light' : ''}`}
             >
                 <td>
                     <svg
