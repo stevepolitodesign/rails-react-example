@@ -17,13 +17,16 @@ RSpec.feature "TodosFlows", type: :feature do
 
   describe "updating a todo item", js: true do
     let(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
-    updated_todo_item_text = 'updated todo'
+    updated_todo_item_text = '12'
     context "todo item is valid" do
       it "updates the todo item" do
         login_as(user_with_todo_items, :scope => :user)
         visit root_path
         todo_item = user_with_todo_items.todo_items.first
-        fill_in("todoItem__title-#{todo_item.id}", with: updated_todo_item_text)
+        updated_todo_item_text.split('').each do |letter|
+          find("#todoItem__title-#{todo_item.id}").send_keys(letter)
+          sleep 1
+        end
         binding.pry
         visit root_path
         updated_todo_item = find('.table > tbody > tr:first-of-type td:nth-child(2) input:first-of-type')
