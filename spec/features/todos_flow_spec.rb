@@ -17,7 +17,7 @@ RSpec.feature "TodosFlows", type: :feature do
 
   describe "updating a todo item", js: true do
     let(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
-    updated_todo_item_text = '12'
+    updated_todo_item_text = 'updated'
     context "todo item is valid" do
       it "updates the todo item" do
         login_as(user_with_todo_items, :scope => :user)
@@ -27,10 +27,9 @@ RSpec.feature "TodosFlows", type: :feature do
           find("#todoItem__title-#{todo_item.id}").send_keys(letter)
           sleep 1
         end
-        binding.pry
         visit root_path
         updated_todo_item = find('.table > tbody > tr:first-of-type td:nth-child(2) input:first-of-type')
-        expect(updated_todo_item.value).to eq(updated_todo_item_text)
+        expect(updated_todo_item.value).to eq(todo_item.title + updated_todo_item_text)
       end
     end
     context "todo item is valid", js: true do
