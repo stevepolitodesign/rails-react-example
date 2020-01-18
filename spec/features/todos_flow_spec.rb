@@ -44,8 +44,16 @@ RSpec.feature "TodosFlows", type: :feature do
   end
 
   describe "deleting a todo item", js: true do
+    let(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
     it "removes the todo item from the list" do
-      skip
+      login_as(user_with_todo_items, :scope => :user)
+      visit root_path
+      todo_item = user_with_todo_items.todo_items.first
+      row = find(".table > tbody > tr:first-of-type td:nth-child(3)")
+      accept_confirm do
+        row.click_button("Delete")
+      end
+      expect(page).to_not have_content(todo_item.title)
     end
   end
 
