@@ -1,9 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe TodoItemController, type: :controller do
+RSpec.describe Api::V1::TodoItemsController, type: :controller do
     describe "index" do
+        let(:user_with_todo_items) { FactoryBot.build(:user_with_todo_items) }
         it "displays the current users todo items" do
-            skip
+            sign_in user_with_todo_items
         end
     end
 
