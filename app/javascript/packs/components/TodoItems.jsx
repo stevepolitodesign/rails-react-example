@@ -16,7 +16,9 @@ class TodoItems extends React.Component {
                     className="btn btn-outline-primary btn-block mb-3"
                     onClick={this.handleClick}
                 >
-                    Toggle Completed Items
+                    {this.props.hideCompletedTodoItems
+                        ? `Show Completed Items`
+                        : `Hide Completed Items `}
                 </button>
                 <div className="table-responsive">
                     <table className="table">
@@ -40,4 +42,5 @@ export default TodoItems
 
 TodoItems.propTypes = {
     toggleCompletedTodoItems: PropTypes.func.isRequired,
+    hideCompletedTodoItems: PropTypes.bool.isRequired,
 }

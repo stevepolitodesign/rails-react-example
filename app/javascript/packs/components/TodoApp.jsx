@@ -87,6 +87,9 @@ class TodoApp extends React.Component {
                 {!this.state.isLoading && (
                     <TodoItems
                         toggleCompletedTodoItems={this.toggleCompletedTodoItems}
+                        hideCompletedTodoItems={
+                            this.state.hideCompletedTodoItems
+                        }
                     >
                         {this.state.todoItems.map(todoItem => (
                             <TodoItem

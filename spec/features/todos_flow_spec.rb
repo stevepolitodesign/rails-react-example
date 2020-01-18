@@ -58,8 +58,20 @@ RSpec.feature "TodosFlows", type: :feature do
   end
 
   describe "filtering todo items", js: true do
+    let(:user_with_completed_todo_items) { FactoryBot.create(:user_with_completed_todo_items) }
     it "only shows incomplete todo items" do
-      skip
+      login_as(user_with_completed_todo_items, :scope => :user)
+      visit root_path
+      todo_items = user_with_completed_todo_items.todo_items
+      todo_items.each do |todo_item|
+        expect(find("#todoItem__title-#{todo_item.id}").value).to eq(todo_item.title)
+      end
+      click_button("Hide Completed Items")
+      within(".table-responsive tbody") do
+        todo_items.each do |todo_item|
+          expect(page).to_not have_content(todo_item.title)
+        end
+      end
     end
   end
 
