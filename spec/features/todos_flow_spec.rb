@@ -32,9 +32,13 @@ RSpec.feature "TodosFlows", type: :feature do
         expect(updated_todo_item.value).to eq(todo_item.title + updated_todo_item_text)
       end
     end
-    context "todo item is valid", js: true do
+    context "todo item is invalid", js: true do
       it "displays an error message" do
-        skip
+        login_as(user_with_todo_items, :scope => :user)
+        visit root_path
+        todo_item = user_with_todo_items.todo_items.first
+        fill_in("todoItem__title-#{todo_item.id}", with: "")
+        expect(page).to have_content("can't be blank")
       end
     end    
   end
