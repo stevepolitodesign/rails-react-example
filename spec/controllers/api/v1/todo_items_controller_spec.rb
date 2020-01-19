@@ -63,10 +63,15 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 new_todo = { title: "a new todo", user: user_with_todo_items }
                 expect { post :create, format: :json, params: { todo_item: new_todo } }.to change{ TodoItem.count }.by(1)
             end
+            it "returns a message if invalid" do
+                sign_in user_with_todo_items
+                invalid_new_todo = { title: "", user: user_with_todo_items }
+                expect { post :create, format: :json, params: { todo_item: invalid_new_todo } }.to_not change{ TodoItem.count }
+                expect(response.status).to eq(422)
+            end              
             it "does not allow a user to create other's todo_items" do
                 sign_in user_with_todo_items
                 new_todo = { title: "a new todo create by the wrong accout", user: another_user_with_todo_items }
-                byebug
                 post :create, format: :json, params: { todo_item: new_todo }
                 expect(JSON.parse(response.body)["user_id"]).to eq(user_with_todo_items.id)
                 expect(JSON.parse(response.body)["user_id"]).to_not eq(another_user_with_todo_items.id)
@@ -99,6 +104,13 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 updated_todo_title = "updated"
                 put :update, format: :json, params: { todo_item: { title: updated_todo_title  }, id: another_users_updated_todo.id }
                 expect(response.status).to eq(401)
+            end
+            it "returns a message if invalid" do
+                sign_in user_with_todo_items
+                updated_todo = user_with_todo_items.todo_items.first
+                updated_todo_title = "" 
+                put :update, format: :json, params: { todo_item: { title: updated_todo_title  }, id: updated_todo.id }
+                expect(response.status).to eq(422)
             end            
         end
         context "when not authenticated" do
