@@ -134,7 +134,9 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
         end
         context "when not authenticated" do
             it "returns unauthorized" do
-                skip
+                destroyed_todo = user_with_todo_items.todo_items.first
+                delete :destroy, format: :json, params: { id: destroyed_todo.id }
+                expect(response.status).to eq(401)
             end
         end          
     end
