@@ -63,6 +63,7 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 expect { post :create, format: :json, params: { todo_item: new_todo } }.to change{ TodoItem.count }.by(1)
 
             end
+
         end
         context "when not authenticated" do
             it "returns unauthorized" do
@@ -86,15 +87,18 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 expect(JSON.parse(response.body)["title"]).to eq(updated_todo_title)
             end
             it "does not allow a user to update other's todo_items" do
-                skip
-            end            
-        end
-        context "when not authenticated" do
-            it "returns unauthorized" do
                 sign_in user_with_todo_items
                 another_users_updated_todo = another_user_with_todo_items.todo_items.first
                 updated_todo_title = "updated"
                 put :update, format: :json, params: { todo_item: { title: updated_todo_title  }, id: another_users_updated_todo.id }
+                expect(response.status).to eq(401)
+            end            
+        end
+        context "when not authenticated" do
+            it "returns unauthorized" do
+                updated_todo = user_with_todo_items.todo_items.first
+                updated_todo_title = "updated"
+                put :update, format: :json, params: { todo_item: { title: updated_todo_title  }, id: updated_todo.id }
                 expect(response.status).to eq(401)
             end
         end        
