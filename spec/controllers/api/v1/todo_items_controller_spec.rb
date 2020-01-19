@@ -40,7 +40,9 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
         end
         context "when not authenticated" do
             it "returns unauthorized" do
-                skip
+                todo_item = user_with_todo_items.todo_items.first
+                get :show, format: :json, params: { id: todo_item.id }
+                expect(response.status).to eq(401)
             end
         end        
     end
