@@ -54,11 +54,16 @@ class Api::V1::TodoItemsController < ApplicationController
       end
     end
 
-    # TODO: Authorize this action
     def destroy
-      @todo_item.destroy
-      respond_to do |format|
-        format.json { head :no_content }
+      if authorized?
+        @todo_item.destroy
+        respond_to do |format|
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.json { render :unauthorized, status: 401 }
+        end
       end
     end
   

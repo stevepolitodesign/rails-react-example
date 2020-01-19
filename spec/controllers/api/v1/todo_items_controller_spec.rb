@@ -127,7 +127,9 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 expect{ delete :destroy, format: :json, params: { id: destroyed_todo.id } }.to change{ TodoItem.count }.by(-1) 
             end
             it "does not allow a user to destroy other's todo_items" do
-                skip
+                sign_in user_with_todo_items
+                another_users_destroyed_todo = another_user_with_todo_items.todo_items.first
+                expect{ delete :destroy, format: :json, params: { id: another_users_destroyed_todo.id } }.to_not change{ TodoItem.count }
             end 
         end
         context "when not authenticated" do
