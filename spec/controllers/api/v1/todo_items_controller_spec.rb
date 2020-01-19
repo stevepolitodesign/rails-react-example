@@ -66,7 +66,10 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
             it "does not allow a user to create other's todo_items" do
                 sign_in user_with_todo_items
                 new_todo = { title: "a new todo create by the wrong accout", user: another_user_with_todo_items }
-                expect { post :create, format: :json, params: { todo_item: new_todo } }.to_not change{ TodoItem.count }
+                byebug
+                post :create, format: :json, params: { todo_item: new_todo }
+                expect(JSON.parse(response.body)["user_id"]).to eq(user_with_todo_items.id)
+                expect(JSON.parse(response.body)["user_id"]).to_not eq(another_user_with_todo_items.id)
             end
         end
         context "when not authenticated" do
