@@ -49,6 +49,7 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
 
     describe "create" do
         let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
+        let!(:another_user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
         context "when authenticated" do
             it "returns a todo_item" do
                 sign_in user_with_todo_items
@@ -61,9 +62,12 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 sign_in user_with_todo_items
                 new_todo = { title: "a new todo", user: user_with_todo_items }
                 expect { post :create, format: :json, params: { todo_item: new_todo } }.to change{ TodoItem.count }.by(1)
-
             end
-
+            it "does not allow a user to create other's todo_items" do
+                sign_in user_with_todo_items
+                new_todo = { title: "a new todo create by the wrong accout", user: another_user_with_todo_items }
+                expect { post :create, format: :json, params: { todo_item: new_todo } }.to_not change{ TodoItem.count }
+            end
         end
         context "when not authenticated" do
             it "returns unauthorized" do
