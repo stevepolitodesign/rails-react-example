@@ -21,9 +21,14 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
     end
 
     describe "show" do
+        let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
         context "when authenticated" do
             it "returns a todo_item" do
-                skip
+                todo_item = user_with_todo_items.todo_items.first
+                sign_in user_with_todo_items
+                get :show, format: :json, params: { id: todo_item.id }
+                expect(response.status).to eq(200)
+                expect(JSON.parse(response.body)).to eq(JSON.parse(todo_item.to_json))
             end
             it "does not allow a user to view other's todo_items" do
                 skip
