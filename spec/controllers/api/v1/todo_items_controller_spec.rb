@@ -66,7 +66,9 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
         end
         context "when not authenticated" do
             it "returns unauthorized" do
-                skip
+                new_todo = { title: "a new todo", user: user_with_todo_items }
+                post :create, format: :json, params: { todo_item: new_todo }
+                expect(response.status).to eq(401)
             end
         end        
     end
