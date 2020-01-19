@@ -122,7 +122,9 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 expect(response.status).to eq(204)
             end
             it "destroys a todo_item" do
-                skip
+                sign_in user_with_todo_items
+                destroyed_todo = user_with_todo_items.todo_items.first
+                expect{ delete :destroy, format: :json, params: { id: destroyed_todo.id } }.to change{ TodoItem.count }.by(-1) 
             end
             it "does not allow a user to destroy other's todo_items" do
                 skip
