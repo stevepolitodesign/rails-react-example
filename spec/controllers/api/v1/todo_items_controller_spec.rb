@@ -112,15 +112,27 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
     end
     
     describe "destroy" do
-        it "returns no content" do
-            skip
+        let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
+        let!(:another_user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
+        context "when authenticated" do
+            it "returns no content" do
+                sign_in user_with_todo_items
+                destroyed_todo = user_with_todo_items.todo_items.first
+                delete :destroy, format: :json, params: { id: destroyed_todo.id }
+                expect(response.status).to eq(204)
+            end
+            it "destroys a todo_item" do
+                skip
+            end
+            it "does not allow a user to destroy other's todo_items" do
+                skip
+            end 
         end
-        it "destroys a todo_item" do
-            skip
-        end
-        it "does not allow a user to destroy other's todo_items" do
-            skip
-        end        
+        context "when not authenticated" do
+            it "returns unauthorized" do
+                skip
+            end
+        end          
     end
 
 end
