@@ -22,6 +22,7 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
 
     describe "show" do
         let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
+        let!(:another_user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
         context "when authenticated" do
             it "returns a todo_item" do
                 todo_item = user_with_todo_items.todo_items.first
@@ -31,7 +32,10 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 expect(JSON.parse(response.body)).to eq(JSON.parse(todo_item.to_json))
             end
             it "does not allow a user to view other's todo_items" do
-                skip
+                another_users_todo_item = another_user_with_todo_items.todo_items.first
+                sign_in user_with_todo_items
+                get :show, format: :json, params: { id: another_users_todo_item.id }
+                expect(response.status).to eq(401)
             end
         end
         context "when not authenticated" do
