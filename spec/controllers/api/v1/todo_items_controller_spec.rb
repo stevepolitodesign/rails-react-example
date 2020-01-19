@@ -74,9 +74,15 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
     end
     
     describe "update" do
+        let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
         context "when authenticated" do
             it "returns a todo_item" do
-                skip
+                sign_in user_with_todo_items
+                updated_todo = user_with_todo_items.todo_items.first
+                updated_todo_title = "updated"
+                put :update, format: :json, params: { todo_item: { title: updated_todo_title  }, id: updated_todo.id }
+                expect(response.status).to eq(200)
+                expect(JSON.parse(response.body)["title"]).to eq(updated_todo_title)
             end
             it "does not allow a user to update other's todo_items" do
                 skip
