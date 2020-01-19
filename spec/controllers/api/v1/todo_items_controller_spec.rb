@@ -75,6 +75,7 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
     
     describe "update" do
         let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
+        let!(:another_user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
         context "when authenticated" do
             it "returns a todo_item" do
                 sign_in user_with_todo_items
@@ -90,7 +91,11 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
         end
         context "when not authenticated" do
             it "returns unauthorized" do
-                skip
+                sign_in user_with_todo_items
+                another_users_updated_todo = another_user_with_todo_items.todo_items.first
+                updated_todo_title = "updated"
+                put :update, format: :json, params: { todo_item: { title: updated_todo_title  }, id: another_users_updated_todo.id }
+                expect(response.status).to eq(401)
             end
         end        
     end

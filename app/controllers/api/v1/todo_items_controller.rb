@@ -37,14 +37,19 @@ class Api::V1::TodoItemsController < ApplicationController
       
     end
     
-    # TODO: Authorize this action
     def update
-      respond_to do |format|
-        if @todo_item.update(todo_item_params)
-          format.json { render :show, status: :ok, location: api_v1_todo_item_path(@todo_item) }
-        else
-          # TODO: Handle errors
-          format.json { render json: @todo_item.errors, status: :unprocessable_entity }
+      if authorized?
+        respond_to do |format|
+          if @todo_item.update(todo_item_params)
+            format.json { render :show, status: :ok, location: api_v1_todo_item_path(@todo_item) }
+          else
+            # TODO: Handle errors
+            format.json { render json: @todo_item.errors, status: :unprocessable_entity }
+          end
+        end
+      else
+        respond_to do |format|
+          format.json { render :unauthorized, status: 401 }
         end
       end
     end
