@@ -58,7 +58,10 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
                 expect(JSON.parse(response.body)["title"]).to eq(new_todo[:title])
             end
             it "creates a todo_item" do
-                skip
+                sign_in user_with_todo_items
+                new_todo = { title: "a new todo", user: user_with_todo_items }
+                expect { post :create, format: :json, params: { todo_item: new_todo } }.to change{ TodoItem.count }.by(1)
+
             end
         end
         context "when not authenticated" do
