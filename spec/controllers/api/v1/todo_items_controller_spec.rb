@@ -48,9 +48,14 @@ RSpec.describe Api::V1::TodoItemsController, type: :controller do
     end
 
     describe "create" do
+        let!(:user_with_todo_items) { FactoryBot.create(:user_with_todo_items) }
         context "when authenticated" do
             it "returns a todo_item" do
-                skip
+                sign_in user_with_todo_items
+                new_todo = { title: "a new todo", user: user_with_todo_items }
+                post :create, format: :json, params: { todo_item: new_todo }
+                expect(response.status).to eq(201)
+                expect(JSON.parse(response.body)["title"]).to eq(new_todo[:title])
             end
             it "creates a todo_item" do
                 skip
