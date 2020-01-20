@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import _ from 'lodash'
 import axios from 'axios'
 import setAxiosHeaders from './AxiosHeaders'
 
@@ -10,10 +11,12 @@ class TodoItem extends React.Component {
         super(props)
         this.handleChange = this.handleChange.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
+        this.updateTodoItem = this.updateTodoItem.bind(this)
         this.inputRef = React.createRef()
         this.completedRef = React.createRef()
     }
-    handleChange() {
+    handleChange = _.debounce(this.updateTodoItem, 1000)
+    updateTodoItem() {
         setAxiosHeaders()
         axios
             .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
@@ -81,7 +84,7 @@ class TodoItem extends React.Component {
                 <td>
                     <input
                         type="text"
-                        value={todoItem.title}
+                        defaultValue={todoItem.title}
                         disabled={todoItem.complete}
                         onChange={this.handleChange}
                         ref={this.inputRef}
