@@ -23,10 +23,8 @@ RSpec.feature "TodosFlows", type: :feature do
         login_as(user_with_todo_items, :scope => :user)
         visit root_path
         todo_item = user_with_todo_items.todo_items.first
-        updated_todo_item_text.split('').each do |letter|
-          find("#todoItem__title-#{todo_item.id}").send_keys(letter)
-          sleep 1
-        end
+        find("#todoItem__title-#{todo_item.id}").send_keys(updated_todo_item_text)
+        sleep 2
         visit root_path
         updated_todo_item = find('.table > tbody > tr:first-of-type td:nth-child(2) input:first-of-type')
         expect(updated_todo_item.value).to eq(todo_item.title + updated_todo_item_text)
