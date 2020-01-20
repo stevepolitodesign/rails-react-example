@@ -9,6 +9,9 @@ import 'bootstrap'
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            complete: this.props.todoItem.complete,
+        }
         this.handleChange = this.handleChange.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
         this.updateTodoItem = this.updateTodoItem.bind(this)
@@ -17,6 +20,7 @@ class TodoItem extends React.Component {
     }
     handleChange = _.debounce(this.updateTodoItem, 1000)
     updateTodoItem() {
+        this.setState({ complete: this.completedRef.current.checked })
         setAxiosHeaders()
         axios
             .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
@@ -51,7 +55,7 @@ class TodoItem extends React.Component {
         return (
             <tr
                 className={`${
-                    todoItem.complete && this.props.hideCompletedTodoItems
+                    this.state.complete && this.props.hideCompletedTodoItems
                         ? `d-none`
                         : ''
                 } ${todoItem.complete ? 'table-light' : ''}`}
@@ -94,7 +98,7 @@ class TodoItem extends React.Component {
                     <div className="form-check form-check-inline">
                         <input
                             type="boolean"
-                            checked={todoItem.complete}
+                            defaultChecked={this.state.complete}
                             type="checkbox"
                             onChange={this.handleChange}
                             ref={this.completedRef}
