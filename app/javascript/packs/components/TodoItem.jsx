@@ -12,25 +12,44 @@ class TodoItem extends React.Component {
         this.state = {
             complete: this.props.todoItem.complete,
         }
-        this.handleChange = this.handleChange.bind(this)
+        this.handleTitleChange = this.handleTitleChange.bind(this)
+        this.handleCompleteChange = this.handleCompleteChange.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
-        this.updateTodoItem = this.updateTodoItem.bind(this)
+        this.updateTodoItemTitle = this.updateTodoItemTitle.bind(this)
+        this.updateTodoItemComplete = this.updateTodoItemComplete.bind(this)
         this.inputRef = React.createRef()
         this.completedRef = React.createRef()
     }
-    handleChange = _.debounce(this.updateTodoItem, 1000)
-    updateTodoItem() {
-        this.setState({ complete: this.completedRef.current.checked })
+    handleTitleChange = _.debounce(this.updateTodoItemTitle, 1000)
+    handleCompleteChange() {
+        this.updateTodoItemComplete()
+    }
+    updateTodoItemTitle() {
         setAxiosHeaders()
         axios
             .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
                 todo_item: {
                     title: this.inputRef.current.value,
+                },
+            })
+            .then(response => {
+                this.props.clearErrors()
+            })
+            .catch(error => {
+                this.props.handleErrors(error)
+            })
+    }
+    updateTodoItemComplete() {
+        setAxiosHeaders()
+        axios
+            .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
+                todo_item: {
                     complete: this.completedRef.current.checked,
                 },
             })
             .then(response => {
                 this.props.clearErrors()
+                this.setState({ complete: this.completedRef.current.checked })
             })
             .catch(error => {
                 this.props.handleErrors(error)
@@ -58,12 +77,12 @@ class TodoItem extends React.Component {
                     this.state.complete && this.props.hideCompletedTodoItems
                         ? `d-none`
                         : ''
-                } ${todoItem.complete ? 'table-light' : ''}`}
+                } ${this.state.complete ? 'table-light' : ''}`}
             >
                 <td>
                     <svg
                         className={`bi bi-check-circle ${
-                            todoItem.complete ? `text-success` : `text-muted`
+                            this.state.complete ? `text-success` : `text-muted`
                         }`}
                         width="2em"
                         height="2em"
@@ -87,8 +106,8 @@ class TodoItem extends React.Component {
                     <input
                         type="text"
                         defaultValue={todoItem.title}
-                        disabled={todoItem.complete}
-                        onChange={this.handleChange}
+                        disabled={this.state.complete}
+                        onChange={this.handleTitleChange}
                         ref={this.inputRef}
                         className="form-control"
                         id={`todoItem__title-${todoItem.id}`}
@@ -100,7 +119,7 @@ class TodoItem extends React.Component {
                             type="boolean"
                             defaultChecked={this.state.complete}
                             type="checkbox"
-                            onChange={this.handleChange}
+                            onChange={this.handleCompleteChange}
                             ref={this.completedRef}
                             className="form-check-input"
                             id={`complete-${todoItem.id}`}
