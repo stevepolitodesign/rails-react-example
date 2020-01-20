@@ -27,4 +27,3 @@ rspec f -d
 ## To Do
 
 -   [ ] Highlight invalid field elements
--   [ ] Consider using `axios` for better compatibility in `app/javascript/packs/components/TodoApp.jsx`
