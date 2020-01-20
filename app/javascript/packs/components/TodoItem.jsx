@@ -26,9 +26,7 @@ class TodoItem extends React.Component {
                 },
             })
             .then(response => {
-                const updatedTodoItem = response.data
                 this.props.clearErrors()
-                this.props.updateTodoItem(updatedTodoItem)
             })
             .catch(error => {
                 this.props.handleErrors(error)
@@ -126,7 +124,6 @@ export default TodoItem
 
 TodoItem.propTypes = {
     todoItem: PropTypes.object.isRequired,
-    updateTodoItem: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
     getTodoItems: PropTypes.func.isRequired,
     hideCompletedTodoItems: PropTypes.bool.isRequired,

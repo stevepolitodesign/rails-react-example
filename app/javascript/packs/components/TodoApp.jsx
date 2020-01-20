@@ -17,7 +17,6 @@ class TodoApp extends React.Component {
             hideCompletedTodoItems: false,
         }
         this.createTodoItem = this.createTodoItem.bind(this)
-        this.updateTodoItem = this.updateTodoItem.bind(this)
         this.handleErrors = this.handleErrors.bind(this)
         this.clearErrors = this.clearErrors.bind(this)
         this.getTodoItems = this.getTodoItems.bind(this)
@@ -60,16 +59,6 @@ class TodoApp extends React.Component {
         this.setState({ todoItems })
     }
 
-    updateTodoItem(updatedTodoItem) {
-        const { id } = updatedTodoItem
-        const todoItems = [...this.state.todoItems]
-        const todoItemIndex = todoItems.findIndex(
-            todoItem => todoItem.id === id
-        )
-        todoItems[todoItemIndex] = { ...updatedTodoItem }
-        this.setState({ todoItems })
-    }
-
     handleErrors(errorMessage) {
         this.setState({ errorMessage })
     }
@@ -102,7 +91,6 @@ class TodoApp extends React.Component {
                             <TodoItem
                                 key={todoItem.id}
                                 todoItem={todoItem}
-                                updateTodoItem={this.updateTodoItem}
                                 handleErrors={this.handleErrors}
                                 clearErrors={this.clearErrors}
                                 getTodoItems={this.getTodoItems}
