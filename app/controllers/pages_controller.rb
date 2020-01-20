@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-    before_action :authenticate_user, only[:my_todo_items]
+    before_action :authenticate_user, only: [:my_todo_items]
 
     def home
     end
