@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 import ErrorMessage from './ErrorMessage'
 import TodoForm from './TodoForm'
@@ -27,19 +28,25 @@ class TodoApp extends React.Component {
         this.getTodoItems()
     }
 
-    // TODO: Maybe use Axios fot better compatibility
     async getTodoItems() {
-        try {
-            this.setState({ isLoading: true })
-            const response = await fetch('/api/v1/todo_items')
-            const todoItems = await response.json()
-            this.setState({ todoItems })
-            this.setState({ isLoading: false })
-        } catch (error) {
-            // Display errors
-            this.setState({ isLoading: true })
-            console.log(error)
-        }
+        axios
+            .get('/api/v1/todo_items')
+            .then(response => {
+                this.clearErrors()
+                this.setState({ isLoading: true })
+                const todoItems = response.data
+                this.setState({ todoItems })
+                this.setState({ isLoading: false })
+            })
+            .catch(error => {
+                this.setState({ isLoading: true })
+                this.setState({
+                    errorMessage: {
+                        message:
+                            'There was an error loading your todo items...',
+                    },
+                })
+            })
     }
 
     toggleCompletedTodoItems() {

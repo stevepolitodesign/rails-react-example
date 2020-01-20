@@ -5,8 +5,6 @@ import axios from 'axios'
 import setAxiosHeaders from './AxiosHeaders'
 
 import 'bootstrap'
-// import 'bootstrap-icons'
-
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
