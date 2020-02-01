@@ -12,48 +12,37 @@ class TodoItem extends React.Component {
         this.state = {
             complete: this.props.todoItem.complete,
         }
-        this.handleTitleChange = this.handleTitleChange.bind(this)
-        this.handleCompleteChange = this.handleCompleteChange.bind(this)
         this.handleDestroy = this.handleDestroy.bind(this)
-        this.updateTodoItemTitle = this.updateTodoItemTitle.bind(this)
-        this.updateTodoItemComplete = this.updateTodoItemComplete.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.updateTodoItem = this.updateTodoItem.bind(this)
         this.inputRef = React.createRef()
         this.completedRef = React.createRef()
     }
-    handleTitleChange = _.debounce(this.updateTodoItemTitle, 1000)
-    handleCompleteChange() {
-        this.updateTodoItemComplete()
+    handleChange() {
+        console.log(`handleChange`)
+        this.updateTodoItem()
     }
-    updateTodoItemTitle() {
-        setAxiosHeaders()
-        axios
-            .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
-                todo_item: {
-                    title: this.inputRef.current.value,
-                },
-            })
-            .then(response => {
-                this.props.clearErrors()
-            })
-            .catch(error => {
-                this.props.handleErrors(error)
-            })
-    }
-    updateTodoItemComplete() {
-        setAxiosHeaders()
-        axios
-            .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
-                todo_item: {
-                    complete: this.completedRef.current.checked,
-                },
-            })
-            .then(response => {
-                this.props.clearErrors()
-                this.setState({ complete: this.completedRef.current.checked })
-            })
-            .catch(error => {
-                this.props.handleErrors(error)
-            })
+    updateTodoItem() {
+        console.log(`updateTodoItem`)
+        this.setState({ complete: this.completedRef.current.checked })
+        const debounced = _.debounce(() => {
+            console.log(`debounce`)
+            setAxiosHeaders()
+            axios
+                .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
+                    todo_item: {
+                        title: this.inputRef.current.value,
+                        complete: this.completedRef.current.checked,
+                    },
+                })
+                .then(response => {
+                    this.props.clearErrors()
+                })
+                .catch(error => {
+                    this.props.handleErrors(error)
+                })
+        }, 1000)
+        debounced()
     }
     handleDestroy() {
         setAxiosHeaders()
@@ -107,7 +96,7 @@ class TodoItem extends React.Component {
                         type="text"
                         defaultValue={todoItem.title}
                         disabled={this.state.complete}
-                        onChange={this.handleTitleChange}
+                        onChange={this.handleChange}
                         ref={this.inputRef}
                         className="form-control"
                         id={`todoItem__title-${todoItem.id}`}
@@ -119,7 +108,7 @@ class TodoItem extends React.Component {
                             type="boolean"
                             defaultChecked={this.state.complete}
                             type="checkbox"
-                            onChange={this.handleCompleteChange}
+                            onChange={this.handleChange}
                             ref={this.completedRef}
                             className="form-check-input"
                             id={`complete-${todoItem.id}`}
