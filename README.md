@@ -1,6 +1,6 @@
 # Rails React Example
 
-An example application built with Rails and React
+An example application built with Rails and React. See a [live demo](https://rails-react-example.herokuapp.com/).
 
 ## Local Build
 
