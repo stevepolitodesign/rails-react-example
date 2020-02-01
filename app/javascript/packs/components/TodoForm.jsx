@@ -44,7 +44,7 @@ class TodoForm extends React.Component {
                             required
                             className="form-control"
                             id="title"
-                            placeholder="Write feature tests for this sample application..."
+                            placeholder="Write your todo item here..."
                         />
                     </div>
                     <div className="form-group col-md-4">
