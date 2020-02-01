@@ -19,14 +19,11 @@ class TodoItem extends React.Component {
         this.completedRef = React.createRef()
     }
     handleChange() {
-        console.log(`handleChange`)
         this.updateTodoItem()
     }
     updateTodoItem() {
-        console.log(`updateTodoItem`)
         this.setState({ complete: this.completedRef.current.checked })
         const debounced = _.debounce(() => {
-            console.log(`debounce`)
             setAxiosHeaders()
             axios
                 .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
