@@ -17,6 +17,7 @@ class TodoItem extends React.Component {
         this.updateTodoItem = this.updateTodoItem.bind(this)
         this.inputRef = React.createRef()
         this.completedRef = React.createRef()
+        this.path = `/api/v1/todo_items/${this.props.todoItem.id}`
     }
     handleChange() {
         this.updateTodoItem()
@@ -26,7 +27,7 @@ class TodoItem extends React.Component {
         const debounced = _.debounce(() => {
             setAxiosHeaders()
             axios
-                .put(`/api/v1/todo_items/${this.props.todoItem.id}`, {
+                .put(this.path, {
                     todo_item: {
                         title: this.inputRef.current.value,
                         complete: this.completedRef.current.checked,
@@ -46,7 +47,7 @@ class TodoItem extends React.Component {
         const confirmation = confirm('Are you sure?')
         if (confirmation) {
             axios
-                .delete(`/api/v1/todo_items/${this.props.todoItem.id}`)
+                .delete(this.path)
                 .then(response => {
                     this.props.getTodoItems()
                 })
