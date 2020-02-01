@@ -7,12 +7,12 @@ class Api::V1::TodoItemsController < ApplicationController
     end
   
     def show
-      respond_to do |format|
-        if authorized?
+      if authorized?
+        respond_to do |format|
           format.json { render :show }
-        else
-          format.json { render :unauthorized, status: 401 }
         end
+      else
+        handle_unauthorized
       end
     end    
     
@@ -30,9 +30,7 @@ class Api::V1::TodoItemsController < ApplicationController
           end
         end
       else
-        respond_to do |format|
-          format.json { render :unauthorized, status: 401 }
-        end
+        handle_unauthorized
       end
       
     end
@@ -48,9 +46,7 @@ class Api::V1::TodoItemsController < ApplicationController
           end
         end
       else
-        respond_to do |format|
-          format.json { render :unauthorized, status: 401 }
-        end
+        handle_unauthorized
       end
     end
 
@@ -61,9 +57,7 @@ class Api::V1::TodoItemsController < ApplicationController
           format.json { head :no_content }
         end
       else
-        respond_to do |format|
-          format.json { render :unauthorized, status: 401 }
-        end
+        handle_unauthorized
       end
     end
   
@@ -74,7 +68,15 @@ class Api::V1::TodoItemsController < ApplicationController
       end
 
       def authorized?
-        @todo_item.user == current_user
+         @todo_item.user == current_user
+      end
+
+      def handle_unauthorized
+        unless authorized?
+          respond_to do |format|
+            format.json { render :unauthorized, status: 401 }
+          end
+        end
       end
   
       def todo_item_params
