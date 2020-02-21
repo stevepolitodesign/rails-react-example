@@ -25,7 +25,3 @@ rspec
 ```
 rspec f -d
 ```
-
-## To Do
-
--   [ ] Highlight invalid field elements
