@@ -8,7 +8,6 @@ class TodoForm extends React.Component {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.titleRef = React.createRef()
-        this.formRef = React.createRef()
     }
 
     handleSubmit(e) {

@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import _ from 'lodash'
+
 const ErrorMessage = props => {
-    const { message } = props.errorMessage
-    const { data } = props.errorMessage.response
+    const data = _.get(props.errorMessage, 'response.data', null)
+    const message = _.get(props.errorMessage, 'message', null)
     if (data) {
         const keys = Object.keys(data)
         return keys.map(key => {

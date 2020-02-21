@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import axios from 'axios'
 import setAxiosHeaders from './AxiosHeaders'
-
-import 'bootstrap'
 class TodoItem extends React.Component {
     constructor(props) {
         super(props)
@@ -20,28 +18,27 @@ class TodoItem extends React.Component {
         this.path = `/api/v1/todo_items/${this.props.todoItem.id}`
     }
     handleChange() {
+        this.setState({
+            complete: this.completedRef.current.checked,
+        })
         this.updateTodoItem()
     }
-    updateTodoItem() {
-        this.setState({ complete: this.completedRef.current.checked })
-        const debounced = _.debounce(() => {
-            setAxiosHeaders()
-            axios
-                .put(this.path, {
-                    todo_item: {
-                        title: this.inputRef.current.value,
-                        complete: this.completedRef.current.checked,
-                    },
-                })
-                .then(response => {
-                    this.props.clearErrors()
-                })
-                .catch(error => {
-                    this.props.handleErrors(error)
-                })
-        }, 1000)
-        debounced()
-    }
+    updateTodoItem = _.debounce(() => {
+        setAxiosHeaders()
+        axios
+            .put(this.path, {
+                todo_item: {
+                    title: this.inputRef.current.value,
+                    complete: this.completedRef.current.checked,
+                },
+            })
+            .then(() => {
+                this.props.clearErrors()
+            })
+            .catch(error => {
+                this.props.handleErrors(error)
+            })
+    }, 1000)
     handleDestroy() {
         setAxiosHeaders()
         const confirmation = confirm('Are you sure?')
@@ -134,7 +131,7 @@ export default TodoItem
 
 TodoItem.propTypes = {
     todoItem: PropTypes.object.isRequired,
-    clearErrors: PropTypes.func.isRequired,
     getTodoItems: PropTypes.func.isRequired,
     hideCompletedTodoItems: PropTypes.bool.isRequired,
+    clearErrors: PropTypes.func.isRequired,
 }
